@@ -1,9 +1,7 @@
 <?php
 
 
-use cartstuff\CartItem;
-use product\Product;
-
+include "loader.php";
 class Cart
 {
     /**
@@ -18,21 +16,21 @@ class Cart
      * Bonus: $quantity must not become more than whatever
      * is $availableQuantity of the product
      *
-     * @param Product $product
+     * @param product $product
      * @param int $quantity
      * @return CartItem
      */
     public function addProduct(Product $product, int $quantity): CartItem
     {
         $cartItem = new CartItem($product, $quantity);
-        if (in_array($cartItem,$this->items)){
+        if (in_array($cartItem, $this->items)) {
 
-            $originalQty =  $this->items[$product->getId()]->getQuantity();
+            $originalQty = $this->items[$product->getId()]->getQuantity();
 
-            if($originalQty + $quantity <= $product->getAvailableQuantity()){
+            if ($originalQty + $quantity <= $product->getAvailableQuantity()) {
                 $this->items[$product->getId()]->setQuantity($originalQty + $quantity);
             }
-        }else{
+        } else {
             $this->items[$product->getId()] = $cartItem;
         }
         return $cartItem;
@@ -46,7 +44,7 @@ class Cart
     public function removeProduct(Product $product)
     {
         $this->items[$product->getId()]->decreaseQuantity();
-        if ($this->items[$product->getId()]->getQuantity() <= 0){
+        if ($this->items[$product->getId()]->getQuantity() <= 0) {
             unset($this->items[$product->getId()]);
         }
     }
@@ -59,7 +57,7 @@ class Cart
     public function getTotalQuantity(): int
     {
         $total = 0;
-        foreach ($this->items as $product){
+        foreach ($this->items as $product) {
             $total += $product->getQuantity();
         }
         return $total;
@@ -73,7 +71,7 @@ class Cart
     public function getTotalSum(): float
     {
         $sum = 0;
-        foreach ($this->items as $product){
+        foreach ($this->items as $product) {
             $sum += $product->getQuantity() * $product->getProduct()->getPrice();
         }
         return $sum;

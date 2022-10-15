@@ -1,8 +1,8 @@
 <?php
 
 
-use product\Product;
 
+include "loader.php";
 class CartItem
 {
     private Product $product;
@@ -20,15 +20,15 @@ class CartItem
 
     public function increaseQuantity(): void
     {
-        if($this->getQuantity() + 1 < $this->getProduct()->getAvailableQuantity() ){
-            $this->setQuantity($this->quantity + 1 );
+        if ($this->getQuantity() + 1 < $this->getProduct()->getAvailableQuantity()) {
+            $this->setQuantity($this->quantity + 1);
         }
     }
 
     public function decreaseQuantity()
     {
-        if($this->getQuantity() - 1 >= 1 ){
-            $this->setQuantity($this->quantity - 1 );
+        if ($this->getQuantity() - 1 >= 1) {
+            $this->setQuantity($this->quantity - 1);
         }
     }
 

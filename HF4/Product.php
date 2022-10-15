@@ -1,8 +1,7 @@
 <?php
 
 
-use cartstuff\Cart;
-use cartstuff\CartItem;
+include "loader.php";
 
 class Product
 {
@@ -38,7 +37,7 @@ class Product
      */
     public function addToCart(Cart $cart, int $quantity): CartItem
     {
-        return $cart->addProduct($this,$quantity);
+        return $cart->addProduct($this, $quantity);
     }
 
     /**
@@ -48,7 +47,7 @@ class Product
      */
     public function removeFromCart(Cart $cart)
     {
-        $cart ->removeProduct($this);
+        $cart->removeProduct($this);
     }
     #region getters and setters
 
